@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 public class SwitchDynamicDatasource extends AbstractDataSource {
 
-    private Map<String, DataSource> dataSourceMap = new WeakHashMap();
+    private Map<String, DataSource> dataSourceMap = new WeakHashMap<String, DataSource>();
 
     private GeneralAttributes generalAttributes;
     private Map<String, TenantDatasourceAttributes> tenantDatasourceAttributesMap;
@@ -93,7 +93,7 @@ public class SwitchDynamicDatasource extends AbstractDataSource {
                 ds = dataSourceMap.get(currentOrgCode);
                 if (ds == null) {
                     HikariConfig config = new HikariConfig();
-                    config.setDriverClassName("com.mysql.jdbc.Driver");
+                    config.setDriverClassName("com.mysql.cj.jdbc.Driver");
                     config.setJdbcUrl(tenantDatasourceAttributes.getUrl());
                     config.setUsername(tenantDatasourceAttributes.getUserName());
                     config.setPassword(tenantDatasourceAttributes.getPassword());
